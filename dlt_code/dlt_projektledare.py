@@ -1,76 +1,41 @@
 import dlt
-
-from dlt.sources.helpers.rest_client import paginate
-from dlt.sources.helpers.rest_client.auth import BearerTokenAuth
-from dlt.sources.helpers.rest_client.paginators import HeaderLinkPaginator
-
-# This is a generic pipeline example and demonstrates
-# how to use the dlt REST client for extracting data from APIs.
-# It showcases the use of authentication via bearer tokens and pagination.
+import requests
+import json
+import os
+from pathlib import Path
 
 
-@dlt.source
-def dlt_projektledare_source(api_secret_key: str = dlt.secrets.value):
-    # print(f"api_secret_key={api_secret_key}")
-    return dlt_projektledare_resource(api_secret_key)
+def _get_ads(url_for_search, params):
+    headers = {'accept': 'application/json'}
+    response = requests.get(url_for_search, headers=headers, params=params)
+    response.raise_for_status()
+    return json.loads(response.content.decode('utf8'))
 
-
-@dlt.resource(write_disposition="append")
-def dlt_projektledare_resource(
-    api_secret_key: str = dlt.secrets.value,
-    org: str = "dlt-hub",
-    repository: str = "dlt",
+@dlt.resource(write_disposition="replace")
+def jobsearch_resource(
+    params
 ):
-    # this is the test data for loading validation, delete it once you yield actual data
-    yield [
-        {
-            "id": 1,
-            "node_id": "MDU6SXNzdWUx",
-            "number": 1347,
-            "state": "open",
-            "title": "Found a bug",
-            "body": "I'm having a problem with this.",
-            "user": {"login": "octocat", "id": 1},
-            "created_at": "2011-04-22T13:33:48Z",
-            "updated_at": "2011-04-22T13:33:48Z",
-            "repository": {
-                "id": 1296269,
-                "node_id": "MDEwOlJlcG9zaXRvcnkxMjk2MjY5",
-                "name": "Hello-World",
-                "full_name": "octocat/Hello-World",
-            },
-        }
-    ]
-
-    # paginate issues and yield every page
-    # api_url = f"https://api.github.com/repos/{org}/{repository}/issues"
-    # for page in paginate(
-    #     api_url,
-    #     auth=BearerTokenAuth(api_secret_key),
-    #     # Note: for more paginators please see:
-    #     # https://dlthub.com/devel/general-usage/http/rest-client#paginators
-    #     paginator=HeaderLinkPaginator(),
-    # ):
-    #     # print(page)
-    #     yield page
-
-
-if __name__ == "__main__":
-    # specify the pipeline name, destination and dataset name when configuring pipeline,
-    # otherwise the defaults will be used that are derived from the current script name
+    url = 'https://jobsearch.api.jobtechdev.se'
+    url_for_search = f"{url}/search"
+    
+    for ad in _get_ads(url_for_search, params)["hits"]:
+        yield ad
+    
+def run_pipeline(query, table_name):
     pipeline = dlt.pipeline(
-        pipeline_name='dlt_projektledare',
+        pipeline_name='dlt_project_leader',
         destination='snowflake',
-        dataset_name='dlt_projektledare_data',
-    )
-
-    data = list(dlt_projektledare_resource())
-
-    # print the data yielded from resource
-    print(data)
-
-    # run the pipeline with your parameters
-    # load_info = pipeline.run(source())
-
-    # pretty print the information on data that was loaded
-    # print(load_info)
+        dataset_name='dlt_project_leader_data',
+    )    
+    params = {"q": query, "limit": 100}
+    load_info = pipeline.run(jobsearch_resource(params=params), table_name=table_name)
+    print(load_info)
+    
+if __name__ == "__main__":
+    working_directory = Path(__file__).parent
+    os.chdir(working_directory)
+    
+    query = "projektledare"
+    table_name = "project_leader_job_ads"
+    
+    run_pipeline(query, table_name)
