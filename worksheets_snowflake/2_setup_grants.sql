@@ -23,8 +23,9 @@ grant select on future views in schema proj_leader_ads.warehouse to role proj_le
 
 
 --Give grants to reporter
+grant usage on warehouse proj_leader_ads_wh to role proj_leader_ads_reporter_role;
 grant usage on database proj_leader_ads to role proj_leader_ads_reporter_role;
-grant usage on schema proj_leader_ads.staging to role proj_leader_ads_reporter_role;
+grant usage on schema proj_leader_ads.marts to role proj_leader_ads_reporter_role;
 grant select on all tables in schema proj_leader_ads.marts to role proj_leader_ads_reporter_role;
 grant select on all views in schema proj_leader_ads.marts to role proj_leader_ads_reporter_role;
 grant select on future tables in schema proj_leader_ads.marts to role proj_leader_ads_reporter_role;
