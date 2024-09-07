@@ -25,7 +25,7 @@ def run_pipeline(query, table_name):
     pipeline = dlt.pipeline(
         pipeline_name='dlt_project_leader',
         destination='snowflake',
-        dataset_name='dlt_project_leader_data',
+        dataset_name='staging',
     )    
     params = {"q": query, "limit": 100}
     load_info = pipeline.run(jobsearch_resource(params=params), table_name=table_name)
@@ -36,6 +36,6 @@ if __name__ == "__main__":
     os.chdir(working_directory)
     
     query = "projektledare"
-    table_name = "project_leader_job_ads"
+    table_name = "stg_project_leader_job_ads"
     
     run_pipeline(query, table_name)
