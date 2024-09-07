@@ -1,0 +1,6 @@
+sources:
+    - name: job_ads
+      schema: staging
+      tables: 
+        - name: stg_project_leader_job_ads
+          identifier: stg_project_leader_job_ads
