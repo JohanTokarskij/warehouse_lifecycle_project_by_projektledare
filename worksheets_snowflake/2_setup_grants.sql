@@ -21,6 +21,12 @@ grant select on all views in schema proj_leader_ads.warehouse to role proj_leade
 grant select, insert, update, delete on future tables in schema proj_leader_ads.warehouse to role proj_leader_ads_dbt_role;
 grant select on future views in schema proj_leader_ads.warehouse to role proj_leader_ads_dbt_role;
 
+grant usage, create table, create view on schema proj_leader_ads.marts to role proj_leader_ads_dbt_role;
+grant select, insert, update, delete on all tables in schema proj_leader_ads.marts to role proj_leader_ads_dbt_role;
+grant select on all views in schema proj_leader_ads.marts to role proj_leader_ads_dbt_role;
+grant select, insert, update, delete on future tables in schema proj_leader_ads.marts to role proj_leader_ads_dbt_role;
+grant select on future views in schema proj_leader_ads.marts to role proj_leader_ads_dbt_role;
+
 
 --Give grants to reporter
 grant usage on warehouse proj_leader_ads_wh to role proj_leader_ads_reporter_role;

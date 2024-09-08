@@ -3,9 +3,8 @@ WITH stg_job_ads AS (
 )
 SELECT
     id,
-    NUMBER_OF_VACANCIES AS vacancies,
+    NUMBER_OF_VACANCIES AS number_vacancies,
     relevance,
-    publication_date,
-    application_deadline,
-    
+    CAST(publication_date AS DATE) AS publication_date,
+    CAST(application_deadline AS DATE) AS application_deadline
 FROM stg_job_ads
