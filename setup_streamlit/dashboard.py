@@ -10,15 +10,15 @@ def layout():
     st.markdown("## Vacancies")
     cols = st.columns(3)
     with cols[0]:
-        st.metric(label = "Total", value = df["VACANCIES"].sum())
+        st.metric(label = "Total", value = df["NUMBER_VACANCIES"].sum())
         
     with cols[1]:
         st.metric(label = "In Stockholm",
-        value = df.query("WORKPLACE_CITY == 'Uppsala'")["VACANCIES"].sum())
+        value = df[df["WORKPLACE_CITY"].str.lower() == 'stockholm']["NUMBER_VACANCIES"].sum())
         
     with cols[2]:
         st.metric(label = "In Göteborg",
-        value = df.query("WORKPLACE_CITY == 'Stockholm'")["VACANCIES"].sum())
+        value = df[df["WORKPLACE_CITY"].str.lower() == 'göteborg']["NUMBER_VACANCIES"].sum())
     
     cols = st.columns(2)
         
@@ -28,10 +28,10 @@ def layout():
             query_job_listings(
                 """
                 SELECT 
-                    sum(vacancies) as vacancies,
+                    sum(number_vacancies) as vacancies,
                     workplace_city
                 FROM 
-                    mart_job_listing
+                    mart_job_listings
                 GROUP BY
                     workplace_city
                 ORDER BY
@@ -46,10 +46,10 @@ def layout():
             query_job_listings(
                 """
                 SELECT 
-                    sum(vacancies) as vacancies,
+                    sum(number_vacancies) as vacancies,
                     employer_name
                 FROM 
-                    mart_job_listing
+                    mart_job_listings
                 GROUP BY
                     employer_name
                 ORDER BY
