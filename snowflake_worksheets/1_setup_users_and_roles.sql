@@ -1,11 +1,12 @@
+-- Create roles
 use role useradmin;
-
 create role if not exists proj_leader_ads_dbt_role;
 create role if not exists proj_leader_ads_dlt_role;
 create role if not exists proj_leader_ads_reporter_role;
 create role if not exists proj_leader_ads_data_team_role;
 
 
+--Create users
 CREATE USER IF NOT EXISTS dlt_user
     PASSWORD = 'dlt_user_password123' 
     DEFAULT_WAREHOUSE = proj_leader_ads_wh
