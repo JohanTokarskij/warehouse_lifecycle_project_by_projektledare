@@ -13,7 +13,5 @@ SELECT
     day(date_value) AS day,
     quarter(date_value) AS quarter,
     weekofyear(date_value) AS week_of_year,
-    dayofweek(date_value) AS day_of_week,
-    CASE WHEN dayofweek(date_value) IN (1, 7) THEN 'Weekend' ELSE 'Weekday'
-    END AS weekday_weekend_flag
+    dayofweek(date_value) AS day_of_week
 FROM recursive_date
