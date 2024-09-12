@@ -172,6 +172,5 @@ watchfiles==0.24.0
 wcwidth==0.2.13
 websockets==13.0.1
 wheel==0.44.0
-win-precise-time==1.4.2
 yarl==1.11.1
 zipp==3.20.1
