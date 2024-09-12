@@ -50,6 +50,7 @@ Table dim_auxilliary_attributes {
     experience_required BOOLEAN
     driver_license BOOLEAN
     access_to_own_car BOOLEAN
+    webpage_url VARCHAR
 }
 
 Ref: fct_job_ads.job_details_id - dim_job_details.job_details_id

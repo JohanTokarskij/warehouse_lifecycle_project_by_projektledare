@@ -9,7 +9,7 @@ SELECT
     WORKPLACE_ADDRESS__STREET_ADDRESS AS workplace_street_address,
     WORKPLACE_ADDRESS__REGION AS workplace_region,
     WORKPLACE_ADDRESS__POSTCODE AS workplace_postcode,
-    WORKPLACE_ADDRESS__CITY AS workplace_city,
+    WORKPLACE_ADDRESS__MUNICIPALITY AS workplace_city,
     WORKPLACE_ADDRESS__COUNTRY AS workplace_country,
     EMPLOYER__URL AS employer_url
 FROM stg_job_ads
