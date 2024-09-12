@@ -29,6 +29,7 @@ def layout():
         st.markdown("### Per city")
         city_data = df.groupby("WORKPLACE_CITY")["NUMBER_VACANCIES"].sum().reset_index()
         city_data = city_data.rename(columns={"WORKPLACE_CITY": "City", "NUMBER_VACANCIES": "Vacancies"})
+        city_data = city_data.sort_values(by="Vacancies", ascending=False)
         st.dataframe(city_data)
     
     # Vacancies per company (Top 5)
@@ -36,15 +37,15 @@ def layout():
         st.markdown("### Per company (top 5)")
         company_data = df.groupby("EMPLOYER_NAME")["NUMBER_VACANCIES"].sum().reset_index()
         company_data = company_data.rename(columns={"EMPLOYER_NAME": "Company", "NUMBER_VACANCIES": "Vacancies"})
-        company_data["Vacancies"] = company_data["Vacancies"].round(0).astype(int)
+        company_data["Vacancies"] = company_data["Vacancies"]
         top_5_companies = company_data.nlargest(5, "Vacancies")
+        top_5_companies = top_5_companies.sort_values(by="Vacancies", ascending=False)
         st.bar_chart(top_5_companies, x="Company", y="Vacancies")
 
     # Time-based trend of job ads
-    st.markdown("### Job Ads Over Time")
+    st.markdown("### Job Ad Vacancies Over Time (by Publication Date)")
     time_data = df.groupby("PUBLICATION_DATE_ID")["NUMBER_VACANCIES"].sum().reset_index()
     time_data = time_data.rename(columns={"NUMBER_VACANCIES": "Vacancies", "PUBLICATION_DATE_ID": "Publication Date"})
-
     time_data["Vacancies"] = time_data["Vacancies"].round(0).astype(int)
     st.line_chart(time_data, x="Publication Date", y="Vacancies")
     
@@ -69,28 +70,28 @@ def layout():
     # Fetch other relevant information for KPIs
     selected_job = df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")
 
-
+    st.markdown("---")
     st.markdown("### Job Details")
-
 
     cols = st.columns(4)
 
     with cols[0]:
-        st.markdown("#### Workplace City")
+        st.markdown("##### Workplace City")
         st.write(selected_job['WORKPLACE_CITY'].values[0])
 
     with cols[1]:
-        st.markdown("#### Salary Type")
+        st.markdown("##### Salary Type")
         st.write(selected_job['SALARY_TYPE'].values[0])
 
     with cols[2]:
-        st.markdown("#### Duration")
+        st.markdown("##### Duration")
         st.write(selected_job['DURATION'].values[0])
 
     with cols[3]:
-        st.markdown("#### Scope of Work")
+        st.markdown("##### Scope of Work")
         scope_min = int(round(40 / int(selected_job["SCOPE_OF_WORK_MIN"].values[0]) * 100, 0))
         st.write(f"{scope_min} hours/week")
+
 
     cols2 = st.columns(2)
 
@@ -103,5 +104,9 @@ def layout():
         st.markdown("#### Application Deadline")
         application_deadline = selected_job["APPLICATION_DEADLINE_ID"].values[0]
         st.write(application_deadline)
+
+    
+
+
 if __name__ == "__main__":
     layout()
