@@ -7,7 +7,7 @@ grant usage on schema proj_leader_ads.staging to role proj_leader_ads_dlt_role;
 grant usage on warehouse proj_leader_ads_wh to role proj_leader_ads_dlt_role;
 grant create table on schema proj_leader_ads.staging to role proj_leader_ads_dlt_role;
 grant select, insert, update, delete on all tables in schema proj_leader_ads.staging to role proj_leader_ads_dlt_role;
-grant select, insert, update, delete on future tables in schema proj_leader_ads.staging to role proj_leader_ads_dlt_role; --funkar ej
+grant select, insert, update, delete on future tables in schema proj_leader_ads.staging to role proj_leader_ads_dlt_role;
 grant insert on all tables in schema proj_leader_ads.public to role proj_leader_ads_dlt_role;
 grant select on all tables in schema proj_leader_ads.public to role proj_leader_ads_dlt_role;
 grant create schema on database proj_leader_ads to role proj_leader_ads_dlt_role;
