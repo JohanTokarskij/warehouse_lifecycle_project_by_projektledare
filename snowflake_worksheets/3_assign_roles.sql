@@ -1,4 +1,4 @@
-USE ROLE ACCOUNTADMIN;
+use role securityadmin;
 
 -- Grant roles to all users
 grant role proj_leader_ads_dlt_role to role proj_leader_ads_dbt_role;
