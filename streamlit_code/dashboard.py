@@ -57,53 +57,56 @@ def layout():
     # Create a single selectbox
     selected_company_ad = st.selectbox("Select a company and advertisement:", df["company_ad"].sort_values().unique())
 
+    if selected_company_ad != None:
     # Extract the selected company and headline
-    selected_company, selected_headline = selected_company_ad.split(" - ")
+        selected_company, selected_headline = selected_company_ad.split(" - ", 1)
 
     # Display the selected job ad title as a real title
-    st.markdown(f"## {selected_headline}")
+        st.markdown(f"## {selected_headline}")
 
-    # Display the job description
-    job_description = df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")["DESCRIPTION_HTML_FORMATTED"].values[0]
-    st.markdown(job_description, unsafe_allow_html=True).markdown(df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")["DESCRIPTION_HTML_FORMATTED"].values[0], unsafe_allow_html=True)
+        # Display the job description
+        job_description = df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")["DESCRIPTION_HTML_FORMATTED"].values[0]
+        st.markdown(job_description, unsafe_allow_html=True).markdown(df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")["DESCRIPTION_HTML_FORMATTED"].values[0], unsafe_allow_html=True)
 
-    # Fetch other relevant information for KPIs
-    selected_job = df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")
+        # Fetch other relevant information for KPIs
+        selected_job = df.query("HEADLINE == @selected_headline and EMPLOYER_NAME == @selected_company")
 
-    st.markdown("---")
-    st.markdown("### Job Details")
+        st.markdown("---")
+        st.markdown("### Job Details")
 
-    cols = st.columns(4)
+        cols = st.columns(4)
 
-    with cols[0]:
-        st.markdown("##### Workplace City")
-        st.write(selected_job['WORKPLACE_CITY'].values[0])
+        with cols[0]:
+            st.markdown("##### Workplace City")
+            st.write(selected_job['WORKPLACE_CITY'].values[0])
 
-    with cols[1]:
-        st.markdown("##### Salary Type")
-        st.write(selected_job['SALARY_TYPE'].values[0])
+        with cols[1]:
+            st.markdown("##### Salary Type")
+            st.write(selected_job['SALARY_TYPE'].values[0])
 
-    with cols[2]:
-        st.markdown("##### Duration")
-        st.write(selected_job['DURATION'].values[0])
+        with cols[2]:
+            st.markdown("##### Duration")
+            st.write(selected_job['DURATION'].values[0])
 
-    with cols[3]:
-        st.markdown("##### Scope of Work")
-        scope_min = int(round(40 / int(selected_job["SCOPE_OF_WORK_MIN"].values[0]) * 100, 0))
-        st.write(f"{scope_min} hours/week")
+        with cols[3]:
+            st.markdown("##### Scope of Work")
+            scope_min = int(round(40 / int(selected_job["SCOPE_OF_WORK_MIN"].values[0]) * 100, 0))
+            st.write(f"{scope_min} hours/week")
 
 
-    cols2 = st.columns(2)
+        cols2 = st.columns(2)
 
-    with cols2[0]:
-        st.markdown("#### Publication Date")
-        publication_date = selected_job["PUBLICATION_DATE_ID"].values[0]
-        st.write(publication_date)
+        with cols2[0]:
+            st.markdown("#### Publication Date")
+            publication_date = selected_job["PUBLICATION_DATE_ID"].values[0]
+            st.write(publication_date)
 
-    with cols2[1]:
-        st.markdown("#### Application Deadline")
-        application_deadline = selected_job["APPLICATION_DEADLINE_ID"].values[0]
-        st.write(application_deadline)
+        with cols2[1]:
+            st.markdown("#### Application Deadline")
+            application_deadline = selected_job["APPLICATION_DEADLINE_ID"].values[0]
+            st.write(application_deadline)
+    else:
+        st.markdown("#### No matching keyword")
 
     
 
