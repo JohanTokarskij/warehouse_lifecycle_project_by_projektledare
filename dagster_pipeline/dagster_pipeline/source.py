@@ -89,7 +89,7 @@ def job_ads():
         return all_ads
 
     def get_data(endpoint_url):
-        all_ads = get_all_pages(ENDPOINT_URL)
+        all_ads = get_all_pages(endpoint_url)
 
         for ad in all_ads:
             yield ad
