@@ -1,5 +1,8 @@
 from dlt.destinations import snowflake
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 snowflake_credentials = {
     'database': os.getenv("SNOWFLAKE_DATABASE"),
