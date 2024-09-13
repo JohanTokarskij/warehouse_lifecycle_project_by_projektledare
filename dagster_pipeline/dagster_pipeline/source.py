@@ -68,7 +68,7 @@ ENDPOINT_URL = 'https://jobsearch.api.jobtechdev.se/search'
 
 
 @dlt.source
-def job_ads():
+def project_leader():
     def get_all_pages(endpoint_url):
         headers = {'accept': 'application/json'}
         params = {'q': 'projektledare', 'limit': 100, 'offset': 0}
@@ -89,14 +89,14 @@ def job_ads():
         
         return all_ads
 
-    def get_data(endpoint_url):
+    def stg_job_ads(endpoint_url):
         all_ads = get_all_pages(endpoint_url)
 
         for ad in all_ads:
             yield ad
 
     yield dlt.resource(
-        get_data(ENDPOINT_URL),
+        stg_job_ads(ENDPOINT_URL),
         write_disposition='replace'
     )
 

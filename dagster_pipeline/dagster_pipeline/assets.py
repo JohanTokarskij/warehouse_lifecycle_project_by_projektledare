@@ -4,14 +4,14 @@ from .project import dbt_projektledare_project
 from dlt import pipeline
 
 from dagster_embedded_elt.dlt import DagsterDltResource, dlt_assets
-from .source import job_ads
+from .source import project_leader
 from .destination import aw_snowflake
 
 
 @dlt_assets(
-        dlt_source = job_ads(),
+        dlt_source = project_leader(),
         dlt_pipeline = pipeline(
-            pipeline_name='dlt_project_leader',
+            pipeline_name='project_leader',
             destination=aw_snowflake,
             dataset_name='staging'
         )
