@@ -1,4 +1,4 @@
-use role sysadmin;
+use role securityadmin;
 
 
 -- Give grants to the dlt role
@@ -14,7 +14,6 @@ grant create schema on database proj_leader_ads to role proj_leader_ads_dlt_role
 
 
 --Give grants to the dbt role
-use role securityadmin;
 grant usage, create table, create view on schema proj_leader_ads.warehouse to role proj_leader_ads_dbt_role;
 grant select, insert, update, delete on all tables in schema proj_leader_ads.warehouse to role proj_leader_ads_dbt_role;
 grant select on all views in schema proj_leader_ads.warehouse to role proj_leader_ads_dbt_role;
