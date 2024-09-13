@@ -2,11 +2,9 @@ from dagster import AssetExecutionContext
 from dagster_dbt import DbtCliResource, dbt_assets
 from .project import dbt_projektledare_project
 from dlt import pipeline
-
 from dagster_embedded_elt.dlt import DagsterDltResource, dlt_assets
 from .source import project_leader
 from .destination import aw_snowflake
-
 
 @dlt_assets(
         dlt_source = project_leader(),
