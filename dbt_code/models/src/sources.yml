@@ -4,3 +4,6 @@ sources:
       tables: 
         - name: stg_project_leader_job_ads
           identifier: stg_project_leader_job_ads
+          meta:
+            dagster:
+              asset_key: ["dlt_job_ads_get_data"]

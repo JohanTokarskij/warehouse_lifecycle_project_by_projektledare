@@ -1,8 +1,9 @@
 import dlt
 import requests
 import json
-import os
-from pathlib import Path
+
+import dlt
+
 
 
 """ #Fetches ads from the API
