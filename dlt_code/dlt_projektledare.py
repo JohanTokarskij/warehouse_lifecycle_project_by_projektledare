@@ -58,7 +58,7 @@ if __name__ == '__main__':
     
     #Define the search query and Snowflake table name
     query = 'projektledare'
-    table_name = 'stg_project_leader_job_ads'
+    table_name = 'stg_job_ads'
     
     #Executes the pipeline
     run_pipeline(query, table_name)
