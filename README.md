@@ -77,3 +77,6 @@ SNOWFLAKE_ROLE =
 * To access Dagster GUI and materialize dlt and dbt assets, execute "`dagster dev`" from `dagster_pipeline/` folder
 * To run the Streamlit dashboard locally, execute `streamlit_code/run_dashboard.py`. Alternatively, you can access the Streamlit dashboard on the cloud by following
 [this link](https://johantokarskij-warehouse-lifecyc-streamlit-codedashboard-xa08u9.streamlit.app/)
+
+Warehouse layer follows this ERD:
+![ERD](images/erd.png)
