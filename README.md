@@ -5,6 +5,10 @@ This project focuses on extracting job search data via an API and loading it int
 ### Dataflow chart
 ![Dataflow](images/dataflow.png)
 
+### ERD
+Warehouse layer follows this ERD:
+![ERD](images/erd.png)
+
 ## Setup
 ### Snowflake setup
 * Run the worksheets in folder *snowflake_worksheets* from 0 to 4
@@ -78,5 +82,3 @@ SNOWFLAKE_ROLE =
 * To run the Streamlit dashboard locally, execute `streamlit_code/run_dashboard.py`. Alternatively, you can access the Streamlit dashboard on the cloud by following
 [this link](https://johantokarskij-warehouse-lifecyc-streamlit-codedashboard-xa08u9.streamlit.app/)
 
-Warehouse layer follows this ERD:
-![ERD](images/erd.png)
