@@ -9,6 +9,6 @@ SELECT
     EMPLOYMENT_TYPE__LABEL AS employment_type,
     DURATION__LABEL AS duration,
     SALARY_TYPE__LABEL AS salary_type,
-    SCOPE_OF_WORK__MAX AS scope_of_work_min,
-    SCOPE_OF_WORK__MIN AS scope_of_work_max
+    SCOPE_OF_WORK__MIN AS scope_of_work_min,
+    SCOPE_OF_WORK__MAX AS scope_of_work_max
 FROM stg_job_ads
