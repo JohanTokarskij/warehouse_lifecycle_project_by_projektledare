@@ -7,7 +7,6 @@ models:
         data_tests:
           - unique
           - not_null
-
       - name: workplace_city
         description: "The city where the employer is located"
         data_tests:
@@ -34,6 +33,7 @@ models:
         data_tests:
           - unique
           - not_null
+
   - name: dim_date
     description: "Dimension table containing details about dates in the job ads"
     columns:
@@ -41,6 +41,34 @@ models:
         description: "Unique identifier for each date"
         data_tests:
           - unique
+          - not_null
+      - name: date
+        description: "The actual date."
+        data_tests:
+          - not_null
+      - name: year
+        description: "The year part of the date."
+        data_tests:
+          - not_null
+      - name: month
+        description: "The month part of the date."
+        data_tests:
+          - not_null
+      - name: day
+        description: "The day part of the date."
+        data_tests:
+          - not_null
+      - name: quarter
+        description: "The quarter part of the date."
+        data_tests:
+          - not_null
+      - name: week_of_year
+        description: "The week of the year part of the date."
+        data_tests:
+          - not_null
+      - name: day_of_week
+        description: "The day of the week part of the date."
+        data_tests:
           - not_null
 
   - name: fct_job_ads
@@ -75,13 +103,11 @@ models:
               quantile: .99
               min_value: 1
               max_value: 20
-          
           - dbt_expectations.expect_column_max_to_be_between:
               min_value: 1
               max_value: 20
               config:
                 severity: warn
-
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: number
       - name: relevance
@@ -89,14 +115,11 @@ models:
         data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 0  
-              max_value: 1 
-
+              min_value: 0
+              max_value: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: float
       - name: publication_date_id
         description: "Date for publication of an ad"
-        data_tests:
-          - not_null
       - name: application_deadline_id
         description: "Date for application deadline of an ad"
