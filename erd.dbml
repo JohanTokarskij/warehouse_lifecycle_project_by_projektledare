@@ -2,7 +2,7 @@ Table fct_job_ads {
     job_id INTEGER [pk, not null]
     job_details_id INTEGER [not null]
     employer_id INTEGER [not null]
-    auxilliary_attributes_id INTEGER [not null]
+    auxiliary_attributes_id INTEGER [not null]
     number_vacancies INTEGER [not null]
     relevance FLOAT [not null]
     publication_date_id timestamp
@@ -45,8 +45,8 @@ Table dim_employer {
     employer_url VARCHAR [not null]
 }
 
-Table dim_auxilliary_attributes {
-    auxilliary_attributes_id INTEGER [pk, not null]
+Table dim_auxiliary_attributes {
+    auxiliary_attributes_id INTEGER [pk, not null]
     experience_required BOOLEAN [not null]
     driver_license BOOLEAN [not null]
     access_to_own_car BOOLEAN [not null]
@@ -55,6 +55,6 @@ Table dim_auxilliary_attributes {
 
 Ref: fct_job_ads.job_details_id - dim_job_details.job_details_id
 Ref: fct_job_ads.employer_id > dim_employer.employer_id
-Ref: fct_job_ads.auxilliary_attributes_id - dim_auxilliary_attributes.auxilliary_attributes_id
+Ref: fct_job_ads.auxiliary_attributes_id - dim_auxiliary_attributes.auxiliary_attributes_id
 Ref: dim_date.date_id < fct_job_ads.publication_date_id
 Ref: dim_date.date_id < fct_job_ads.application_deadline_id
