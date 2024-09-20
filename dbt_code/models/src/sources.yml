@@ -4,6 +4,7 @@ sources:
       tables: 
         - name: stg_job_ads
           identifier: stg_job_ads
+          description: "Staging table with data fetched from Job search API via DLT"
           meta:
             dagster:
               asset_key: ["dlt_project_leader_stg_job_ads"]
