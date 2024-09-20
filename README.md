@@ -7,7 +7,7 @@ This project focuses on extracting job search data via an API and loading it int
 
 ### ERD
 Warehouse layer follows this ERD:
-![ERD](images/erd.png)
+![ERD](images/erd_warehouse.png)
 
 ## Setup
 ### Snowflake setup
