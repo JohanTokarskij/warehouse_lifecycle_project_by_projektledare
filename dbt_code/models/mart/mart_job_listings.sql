@@ -17,7 +17,7 @@ SELECT
     f.relevance,
     e.employer_name,
     e.workplace_city,
-    jd."description",
+    jd.job_description,
     jd.description_html_formatted,
     jd.duration,
     jd.scope_of_work_min,

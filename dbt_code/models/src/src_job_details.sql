@@ -4,7 +4,7 @@ WITH stg_job_ads AS (
 SELECT
     id,
     headline,
-    DESCRIPTION__TEXT AS "description",
+    DESCRIPTION__TEXT AS job_description,
     DESCRIPTION__TEXT_FORMATTED AS description_html_formatted,
     EMPLOYMENT_TYPE__LABEL AS employment_type,
     DURATION__LABEL AS duration,
