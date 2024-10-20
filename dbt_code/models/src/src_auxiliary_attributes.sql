@@ -3,7 +3,6 @@ WITH stg_job_ads AS (
 )
 SELECT
     id,
-    EMPLOYER__NAME as employer_name,
     experience_required,
     driving_license_required AS driving_license,
     access_to_own_car,
